@@ -485,3 +485,5 @@ Pipfile.lock
 # Keep test fixtures
 !tests/fixtures/**
 !tests/data/**
+*.log
+

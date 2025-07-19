@@ -1,0 +1,487 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+test-results/
+.coverage.*
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+docs/.doctrees/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# =============================================================================
+# PROJECT SPECIFIC
+# =============================================================================
+
+# Model files and checkpoints
+*.pth
+*.pt
+*.pkl
+*.joblib
+*.h5
+*.hdf5
+*.ckpt
+checkpoints/
+models/
+saved_models/
+model_artifacts/
+
+# Data files
+data/raw/*
+data/processed/*
+data/interim/*
+data/external/*
+data/models/*
+data/results/*
+!data/*/README.md
+!data/*/.gitkeep
+
+# Logs and outputs
+logs/
+*.log
+log_*
+output/
+outputs/
+results/
+artifacts/
+runs/
+wandb/
+
+# Temporary files
+temp/
+tmp/
+temp_*
+*.tmp
+.temp/
+
+# Cache directories
+.cache/
+cache/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Jupyter notebook outputs
+*.ipynb_checkpoints
+.ipynb_checkpoints/
+
+# Academic deliverables (keep source, ignore compiled)
+academic/*.pdf
+academic/*.docx
+academic/*.pptx
+academic/figures/*.png
+academic/figures/*.jpg
+academic/figures/*.eps
+academic/tables/
+academic/bibliography/
+
+# Configuration files with secrets
+config/secrets.yaml
+config/production.yaml
+.env.production
+.env.local
+secrets/
+credentials/
+
+# Docker
+.docker/
+docker-compose.override.yml
+.dockerignore
+
+# Monitoring and profiling
+.prof/
+prof/
+profiles/
+*.prof
+*.cprof
+
+# =============================================================================
+# DEVELOPMENT TOOLS
+# =============================================================================
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+
+# Testing
+.tox/
+.pytest_cache/
+test_results/
+test_outputs/
+
+# Linting and formatting
+.flake8
+.pylintrc
+.black
+.isort.cfg
+
+# Type checking
+.mypy_cache/
+pyrightconfig.json
+
+# Pre-commit
+.pre-commit-config.yaml.bak
+
+# =============================================================================
+# DEPLOYMENT
+# =============================================================================
+
+# Kubernetes
+*.kubeconfig
+kube_config_*
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Ansible
+*.retry
+.vault_pass
+
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+ssl/
+certs/
+
+# =============================================================================
+# PLATFORM SPECIFIC
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# DEEP LEARNING SPECIFIC
+# =============================================================================
+
+# PyTorch
+*.pth
+*.pt
+lightning_logs/
+.neptune/
+
+# TensorFlow
+*.pb
+*.tflite
+saved_model/
+tensorboard_logs/
+
+# Weights & Biases
+wandb/
+
+# MLflow
+mlruns/
+mlartifacts/
+
+# Hugging Face
+.cache/huggingface/
+.cache/torch/
+transformers_cache/
+
+# CUDA
+*.fatbin
+*.cubin
+*.ptx
+
+# =============================================================================
+# ACADEMIC PROJECT SPECIFIC
+# =============================================================================
+
+# LaTeX auxiliary files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc[0-9]*
+*.slf[0-9]*
+*.slt[0-9]*
+*.stc[0-9]*
+
+# Bibliography management
+*.bib.bak
+*.bib.sav
+
+# Presentation files
+*.nav
+*.snm
+*.vrb
+
+# Research data
+literature_review/pdfs/
+research_notes/
+experimental_results/
+raw_results/
+
+# Submission packages
+submission/
+final_submission/
+*.zip
+*.tar.gz
+*.rar
+
+# =============================================================================
+# PERFORMANCE AND MONITORING
+# =============================================================================
+
+# Profiling
+*.prof
+*.cprof
+.prof/
+
+# Memory profiling
+*.mprof
+
+# Line profiling
+*.lprof
+
+# Benchmarking results
+benchmark_results/
+performance_logs/
+
+# =============================================================================
+# BACKUP AND TEMPORARY
+# =============================================================================
+
+# Backup files
+*.bak
+*.backup
+*.old
+*_backup
+*_old
+
+# Temporary extraction
+extract/
+extracted/
+
+# Archive files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Lock files
+*.lock
+package-lock.json
+poetry.lock
+Pipfile.lock
+
+# =============================================================================
+# EXCEPTIONS (Files to keep)
+# =============================================================================
+
+# Keep essential empty directories
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/models/.gitkeep
+!data/results/.gitkeep
+!logs/.gitkeep
+!checkpoints/.gitkeep
+
+# Keep sample/demo files
+!data/samples/**
+!examples/**
+!demos/**
+
+# Keep documentation assets
+!docs/images/**
+!docs/figures/**
+
+# Keep configuration templates
+!configs/template_*
+!configs/example_*
+!.env.example
+!.env.template
+
+# Keep test fixtures
+!tests/fixtures/**
+!tests/data/**

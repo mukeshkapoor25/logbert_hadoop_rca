@@ -1,0 +1,90 @@
+MIT License
+
+Copyright (c) 2025 LogBERT Hadoop RCA Capstone Project
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Additional Attribution
+
+This project incorporates components from the following open-source projects:
+
+### Drain Log Parser
+- Source: https://github.com/logpai/logparser
+- License: MIT License
+- Citation: He, P., Zhu, J., Zheng, Z., & Lyu, M. R. (2017). Drain: An online log parsing approach with fixed depth tree. Proceedings of the 2017 International Conference on Web Services (ICWS).
+
+### BERT Architecture
+- Source: Inspired by Google's BERT implementation
+- Citation: Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv preprint arXiv:1810.04805.
+
+### Hadoop Log Dataset
+- Source: LogHub (https://github.com/logpai/loghub)
+- Citation: Zhu, J., He, S., Liu, J., He, P., Xie, Q., Zheng, Z., & Lyu, M. R. (2019). Tools and benchmarks for automated log parsing. In Proceedings of the 41st International Conference on Software Engineering: Software Engineering in Practice (pp. 121-130).
+
+### Deep SVDD
+- Inspiration: Deep Support Vector Data Description
+- Citation: Ruff, L., Vandermeulen, R., Goernitz, N., Deecke, L., Siddiqui, S. A., Binder, A., ... & Kloft, M. (2018). Deep one-class classification. In International conference on machine learning (pp. 4393-4402).
+
+## Academic Use
+
+This software is developed as part of an academic capstone project. If you use this software in academic research, please cite:
+
+```bibtex
+@misc{logbert_hadoop_rca_2025,
+  title={LogBERT Hadoop RCA: Intelligent Root Cause Analysis for Hadoop Clusters using Deep Learning},
+  author={[Student Name]},
+  year={2025},
+  institution={[University Name]},
+  type={Capstone Project},
+  url={https://github.com/sanjeev07/logbert_hadoop_rca}
+}
+```
+
+## Commercial Use
+
+While this software is provided under the MIT License, users should be aware that:
+
+1. This is primarily an academic/research project
+2. Production use should include thorough testing and validation
+3. The authors provide no warranties for commercial deployment
+4. Consider the maturity and support lifecycle before commercial adoption
+
+## Dataset License
+
+The Hadoop log dataset used in this project is subject to its own licensing terms:
+- Original dataset from LogHub repository
+- Used under academic fair use provisions
+- Commercial users should verify dataset licensing separately
+
+## Third-Party Dependencies
+
+This project uses numerous third-party libraries. See requirements.txt for a complete list. Key dependencies include:
+
+- PyTorch (BSD-3-Clause License)
+- Transformers (Apache 2.0 License)  
+- FastAPI (MIT License)
+- Pandas (BSD-3-Clause License)
+- NumPy (BSD-3-Clause License)
+- Scikit-learn (BSD-3-Clause License)
+
+Each dependency maintains its own license terms which users must comply with.
+
+## Disclaimer
+
+This software is provided for educational and research purposes. While developed with production considerations, it should be thoroughly tested and validated before deployment in critical systems. The authors and contributors are not responsible for any damages or losses resulting from the use of this software.

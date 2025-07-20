@@ -14,24 +14,32 @@ project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 try:
-    from src.api.main import app, serve
+    from src.main import app
+    import uvicorn
     
     if __name__ == "__main__":
         print("🚀 Starting LogBERT Hadoop RCA API in development mode...")
         print("📚 API Documentation will be available at: http://localhost:8000/docs")
-        print("🔍 Health check available at: http://localhost:8000/health")
+        print("🔍 Health check available at: http://localhost:8000/api/health")
         print("📊 Root endpoint available at: http://localhost:8000/")
+        print("ℹ️  Socket.IO requests handled with info responses")
         print("")
         print("🛠️  Development Features:")
         print("   - Auto-reload on code changes")
         print("   - Detailed logging")
         print("   - Interactive API documentation")
-        print("   - Mock ML models (no PyTorch required)")
+        print("   - Socket.IO request handling")
         print("")
         print("⚡ Starting server...")
         
         # Start the server
-        serve()
+        uvicorn.run(
+            "src.main:app",
+            host="0.0.0.0",
+            port=8000,
+            reload=True,
+            log_level="info"
+        )
         
 except ImportError as e:
     print(f"❌ Import error: {e}")

@@ -1,0 +1,127 @@
+{
+  "test_log_explanation": {
+    "description": "Test log files for Hadoop LogBERT anomaly detection system",
+    "log_format": "[AppId] Date Time Level [Process] Component: Content",
+    "anomaly_patterns": {
+      "machine_down": {
+        "description": "Server/machine failure simulation",
+        "key_indicators": [
+          "Connection refused to ResourceManager",
+          "Lost connection to node manager", 
+          "Node dead or not found",
+          "Machine down detected",
+          "Container launch failed: java.net.ConnectException"
+        ],
+        "example_app_ids": ["application_1445087491445_0002"],
+        "severity": "FATAL"
+      },
+      "network_disconnection": {
+        "description": "Network connectivity issues",
+        "key_indicators": [
+          "Heartbeat timeout detected",
+          "Network timeout: Read timed out",
+          "java.net.SocketTimeoutException",
+          "Unable to communicate with ResourceManager",
+          "Connection lost with task attempt"
+        ],
+        "example_app_ids": ["application_1445175094696_0001"],
+        "severity": "ERROR"
+      },
+      "disk_full": {
+        "description": "Storage space exhaustion",
+        "key_indicators": [
+          "No space left on device",
+          "Disk space check failed",
+          "Unable to create temporary directory",
+          "Output commit failed: Disk full",
+          "Insufficient disk space"
+        ],
+        "example_app_ids": ["application_1445182159119_0001"],
+        "severity": "ERROR"
+      },
+      "memory_exhaustion": {
+        "description": "Out of memory conditions",
+        "key_indicators": [
+          "java.lang.OutOfMemoryError: Java heap space",
+          "Container exceeded memory limits",
+          "GC overhead limit exceeded",
+          "Memory usage approaching limit",
+          "Container killed due to memory violation"
+        ],
+        "example_app_ids": ["application_1445062781478_0012"],
+        "severity": "FATAL"
+      },
+      "container_failures": {
+        "description": "Container launch and execution failures",
+        "key_indicators": [
+          "Container launch exception: Exit code 143",
+          "Container preempted by scheduler",
+          "TaskAttempt failed with container exit code 1",
+          "Resource limit exceeded",
+          "Too many failed tasks"
+        ],
+        "example_app_ids": ["application_1445144423722_0021"],
+        "severity": "ERROR"
+      },
+      "configuration_errors": {
+        "description": "Invalid configurations and security issues",
+        "key_indicators": [
+          "Invalid job configuration",
+          "Authentication failed: Invalid credentials",
+          "Permission denied: User unauthorized",
+          "Security exception: Access denied",
+          "Configuration validation error"
+        ],
+        "example_app_ids": ["application_1445076437777_0003"],
+        "severity": "FATAL"
+      },
+      "cascading_failures": {
+        "description": "System-wide failures affecting multiple components",
+        "key_indicators": [
+          "Resource Manager failover detected",
+          "Cluster instability",
+          "Multiple node failures detected",
+          "Cascading cluster failures",
+          "System-wide failure"
+        ],
+        "example_app_ids": ["application_1445094324383_0004"],
+        "severity": "FATAL"
+      }
+    },
+    "normal_patterns": {
+      "description": "Expected healthy operation logs",
+      "key_indicators": [
+        "Application attempt started successfully",
+        "Got allocated containers",
+        "Job transitioned from NEW to INITED",
+        "TaskAttempt started",
+        "Container launched successfully",
+        "Task committed successfully",
+        "Job transitioned from RUNNING to SUCCEEDED",
+        "Application completed successfully"
+      ],
+      "example_app_ids": ["application_1445087491445_0001", "application_1445087491445_0005"],
+      "severity": "INFO"
+    },
+    "usage_instructions": {
+      "test_with_api": {
+        "description": "Test the LogBERT RCA system using the API",
+        "steps": [
+          "1. Ensure AI agents are running (python start_ai_agents.py)",
+          "2. Use the /rca endpoint to analyze logs",
+          "3. Upload test_logs/quick_test.log for quick testing",
+          "4. Upload test_logs/hadoop_anomaly_test.log for comprehensive testing"
+        ]
+      },
+      "expected_results": {
+        "normal_apps": "Should be classified as Normal with low anomaly scores",
+        "abnormal_apps": "Should be classified as Abnormal with high anomaly scores and RCA explanations",
+        "anomaly_indicators": [
+          "z_score > 2 (Deep SVDD anomaly detection)",
+          "undetected_ratio > 0.5 (LogBERT masked language model)",
+          "Status: Abnormal with explanation"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+# LogBERT Hadoop RCA - Docker Compose Configuration
+# =================================================
+# Complete orchestration for LogBERT AI Agents system
+
+version: '3.8'
+
+services:
+  # ============================================================================
+  # LogBERT AI Agents API Service
+  # ============================================================================
+  logbert-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+      args:
+        INSTALL_DEV: "false"
+    image: logbert-hadoop-rca:latest
+    container_name: logbert-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - LOGBERT_ENV=production
+      - LOGBERT_LOG_LEVEL=INFO
+      - LOGBERT_HOST=0.0.0.0
+      - LOGBERT_PORT=8000
+      - LOGBERT_WORKERS=4
+    volumes:
+      # Mount logs directory for persistence
+      - ./logs:/app/logs
+      # Mount uploads directory for file uploads
+      - ./uploads:/app/uploads
+      # Mount AI models directory (optional - for pre-trained models)
+      - ./AI_MODELS:/app/AI_MODELS
+    networks:
+      - logbert-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 2G
+
+  # ============================================================================
+  # LogBERT Development Service (commented out by default)
+  # ============================================================================
+  # logbert-dev:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #     target: development
+  #     args:
+  #       INSTALL_DEV: "true"
+  #   image: logbert-hadoop-rca:dev
+  #   container_name: logbert-dev
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - LOGBERT_ENV=development
+  #     - LOGBERT_LOG_LEVEL=DEBUG
+  #   volumes:
+  #     # Mount source code for development
+  #     - .:/app
+  #     # Named volume for dependencies to speed up rebuilds
+  #     - logbert-dev-deps:/root/.cache/pip
+  #   networks:
+  #     - logbert-network
+
+  # ============================================================================
+  # Redis Cache (optional - for caching and session management)
+  # ============================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: logbert-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - logbert-network
+    command: redis-server --appendonly yes
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  logbert-network:
+    driver: bridge
+    name: logbert-network
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  redis-data:
+    driver: local
+  logbert-dev-deps:
+    driver: local

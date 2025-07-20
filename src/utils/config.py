@@ -89,9 +89,7 @@ class Settings(BaseSettings):
     CACHE_TTL_SECONDS: int = Field(default=300, description="Cache TTL in seconds")
     REDIS_URL: Optional[str] = Field(default=None, description="Redis URL for caching")
     
-    # Monitoring & Metrics
-    ENABLE_METRICS: bool = Field(default=True, description="Enable metrics collection")
-    METRICS_PORT: int = Field(default=9090, description="Metrics server port")
+    # Monitoring
     HEALTH_CHECK_INTERVAL: int = Field(default=30, description="Health check interval in seconds")
     
     # File Upload Settings
@@ -215,7 +213,6 @@ class DevelopmentSettings(Settings):
     DEBUG: bool = True
     LOG_LEVEL: str = "DEBUG"
     API_RELOAD: bool = True
-    ENABLE_METRICS: bool = False
     ENABLE_RATE_LIMITING: bool = False
 
 
@@ -224,7 +221,6 @@ class ProductionSettings(Settings):
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
     API_RELOAD: bool = False
-    ENABLE_METRICS: bool = True
     ENABLE_RATE_LIMITING: bool = True
     CORS_ORIGINS: List[str] = []  # Must be explicitly set in production
 

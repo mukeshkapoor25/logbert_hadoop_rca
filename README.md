@@ -6,10 +6,11 @@ An intelligent **Root Cause Analysis (RCA) system** for Hadoop clusters using **
 
 - **🤖 AI-Powered Anomaly Detection**: Uses custom LogBERT model with Deep SVDD for accurate anomaly detection
 - **🔍 Intelligent Root Cause Analysis**: LLM-powered explanations for detected anomalies
-- **⚡ Real-time Processing**: FastAPI-based web service for live log analysis
+- **⚡ REST API Service**: FastAPI-based API service for programmatic log analysis
 - **🏗️ Hadoop-Optimized**: Specifically designed for Hadoop cluster environments
 - **📊 Multi-modal Analysis**: Combines log template analysis with deep embedding distances
 - **🔧 Production Ready**: Scalable architecture with comprehensive testing
+- **🤖 AI Agent Architecture**: Distributed agent system for scalable processing
 
 ## 🏗️ Architecture
 
@@ -72,11 +73,14 @@ An intelligent **Root Cause Analysis (RCA) system** for Hadoop clusters using **
 
 ## 🚀 Quick Start
 
-### 1. Start the Web Service
+### 1. Start the API Service
 
 ```bash
 # Start FastAPI server
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+
+# Or using the Python script
+python src/main.py
 ```
 
 ### 2. Upload Log File for Analysis
@@ -107,7 +111,47 @@ print(f"Status: {rca_results['status']}")
 print(f"Analysis: {rca_results['details']}")
 ```
 
-## 📡 API Usage
+## � Project Structure
+
+```
+logbert_hadoop_rca/
+├── src/                          # Main source code
+│   ├── agents/                   # AI agents for distributed processing  
+│   │   ├── anomaly_detection_agent.py
+│   │   ├── coordinator_agent.py
+│   │   ├── root_cause_agent.py
+│   │   └── ...
+│   ├── api/                      # FastAPI application
+│   │   ├── main.py              # Main API entry point
+│   │   ├── routes.py            # API endpoints
+│   │   └── middleware.py        # Custom middleware
+│   ├── data/                     # Data processing utilities
+│   │   ├── preprocessing.py     # Log preprocessing
+│   │   ├── Drain.py            # Drain log parser
+│   │   └── dataset.py          # Dataset management
+│   ├── models/                   # ML models and schemas
+│   │   ├── logbert.py          # LogBERT model implementation
+│   │   ├── deep_svdd.py        # Deep SVDD anomaly detection
+│   │   └── schemas.py          # API data schemas
+│   ├── services/                 # Business logic services
+│   │   ├── inference.py        # Model inference
+│   │   └── rca.py              # Root cause analysis
+│   └── utils/                    # Utility functions
+│       ├── config.py           # Configuration management
+│       └── logging.py          # Logging setup
+├── tests/                        # Test suite
+├── examples/                     # Usage examples
+├── AI_MODELS/                    # Model storage
+│   ├── datasets/               # Training datasets
+│   └── trained_models/         # Pre-trained models
+├── test_logs/                    # Sample log files
+├── requirements.txt              # Python dependencies
+├── pyproject.toml               # Project configuration
+├── .env                         # Environment variables
+└── README.md                    # This file
+```
+
+## �📡 API Usage
 
 ### Endpoints
 

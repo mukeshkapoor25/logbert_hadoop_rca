@@ -98,8 +98,6 @@ notebooks = [
     "ipywidgets>=8.0.0",
 ]
 monitoring = [
-    "prometheus-client>=0.17.0",
-    "grafana-api>=1.0.3",
     "psutil>=5.9.0",
 ]
 deployment = [

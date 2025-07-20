@@ -141,7 +141,6 @@ System Performance:
 - **Data Processing**: Pandas, NumPy, Scikit-learn
 - **Deployment**: Docker, Docker Compose
 - **Testing**: Pytest, Coverage.py
-- **Monitoring**: Prometheus, Grafana (future work)
 
 ## 📈 Impact & Applications
 

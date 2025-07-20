@@ -1,0 +1,68 @@
+# LogBERT Hadoop RCA - Development Docker Compose
+# ===============================================
+# Development-specific configuration with hot reloading
+
+version: '3.8'
+
+services:
+  # ============================================================================
+  # LogBERT Development Service
+  # ============================================================================
+  logbert-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+      args:
+        INSTALL_DEV: "true"
+    image: logbert-hadoop-rca:dev
+    container_name: logbert-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - LOGBERT_ENV=development
+      - LOGBERT_LOG_LEVEL=DEBUG
+      - LOGBERT_HOST=0.0.0.0
+      - LOGBERT_PORT=8000
+    volumes:
+      # Mount source code for hot reloading
+      - .:/app
+      # Exclude node_modules and Python cache
+      - /app/__pycache__
+      - /app/venv
+      # Named volume for pip cache to speed up rebuilds
+      - logbert-dev-cache:/root/.cache/pip
+    networks:
+      - logbert-dev-network
+    command: ["python", "start_ai_agents.py", "--dev", "--host", "0.0.0.0", "--port", "8000"]
+    stdin_open: true
+    tty: true
+
+  # ============================================================================
+  # Redis for Development
+  # ============================================================================
+  redis-dev:
+    image: redis:7-alpine
+    container_name: logbert-redis-dev
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - logbert-dev-network
+    command: redis-server --appendonly yes
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  logbert-dev-network:
+    driver: bridge
+    name: logbert-dev-network
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  logbert-dev-cache:
+    driver: local

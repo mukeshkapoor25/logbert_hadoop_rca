@@ -9,7 +9,7 @@ import time
 import logging
 from datetime import datetime
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, File, UploadFile
 from fastapi.responses import JSONResponse
 
 from ..models.schemas import (
@@ -32,6 +32,9 @@ logger = get_logger(__name__)
 # Create router
 router = APIRouter()
 
+# Track server start time for uptime calculation
+server_start_time = datetime.utcnow()
+
 
 @router.get("/", tags=["Root"])
 async def api_root():
@@ -52,12 +55,16 @@ async def api_root():
 @router.get("/health", response_model=HealthResponse, tags=["Health"])
 async def health_check():
     """Health check endpoint for monitoring."""
+    current_time = datetime.utcnow()
+    uptime = (current_time - server_start_time).total_seconds()
+    
     return HealthResponse(
         status="healthy",
-        timestamp=datetime.utcnow().isoformat(),
+        timestamp=current_time.isoformat(),
         version="1.0.0",
         environment="development",
-        checks={
+        uptime_seconds=uptime,
+        details={
             "api": "healthy",
             "config": "loaded",
             "logging": "operational",
@@ -179,6 +186,46 @@ async def analyze_logs(request: LogAnalysisRequest) -> LogAnalysisResponse:
         )
 
 
+@router.post("/batch-analyze", tags=["Analysis"])
+async def batch_analyze(files: List[UploadFile] = File(...)):
+    """
+    Batch analyze multiple log files (mock implementation).
+    """
+    file_results = []
+    for file in files:
+        # Mock analysis for each file
+        content = await file.read()
+        file_results.append({
+            "filename": file.filename,
+            "size": len(content),
+            "anomalies_detected": 2,
+            "root_causes": ["High CPU usage pattern", "Memory leak detected"],
+            "analysis_time": "1.2s"
+        })
+    
+    return {
+        "success": True,
+        "files_processed": len(files),
+        "results": file_results,
+        "total_anomalies": sum(r["anomalies_detected"] for r in file_results),
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+@router.post("/analyze/sample", tags=["Analysis"])
+async def analyze_sample(data: Dict[str, Any]):
+    """
+    Analyze sample log data (mock implementation).
+    """
+    return {
+        "success": True,
+        "sample_type": data.get("sample_type", "unknown"),
+        "anomalies_detected": 1,
+        "analysis_summary": "Sample analysis completed - minor anomaly detected",
+        "timestamp": datetime.now().isoformat()
+    }
+
+
 @router.get("/models", response_model=List[ModelInfo], tags=["Models"])
 async def list_available_models() -> List[ModelInfo]:
     """List available models (Development Mock)."""
@@ -261,3 +308,179 @@ async def development_info():
         ],
         "capstone_note": "This API demonstrates the complete architecture and can be enhanced with full ML capabilities",
     }
+
+
+# Agent Management Endpoints (Mock)
+
+@router.get("/agents", tags=["Agents"])
+async def list_agents():
+    """
+    List all available AI agents.
+    """
+    return {
+        "agents": [
+            {
+                "id": "coordinator_001",
+                "name": "Coordinator Agent",
+                "type": "coordinator",
+                "status": "active",
+                "capabilities": ["coordination", "task_distribution"]
+            },
+            {
+                "id": "log_parser_001", 
+                "name": "Log Parser Agent",
+                "type": "log_parser",
+                "status": "initialized",
+                "capabilities": ["log_parsing", "preprocessing"]
+            },
+            {
+                "id": "anomaly_detection_001",
+                "name": "Anomaly Detection Agent", 
+                "type": "anomaly_detection",
+                "status": "initialized",
+                "capabilities": ["anomaly_detection", "pattern_recognition"]
+            },
+            {
+                "id": "root_cause_001",
+                "name": "Root Cause Agent",
+                "type": "root_cause",
+                "status": "initialized", 
+                "capabilities": ["root_cause_analysis", "correlation"]
+            },
+            {
+                "id": "explanation_001",
+                "name": "Explanation Agent",
+                "type": "explanation", 
+                "status": "initialized",
+                "capabilities": ["explanation_generation", "reporting"]
+            }
+        ],
+        "total_agents": 5,
+        "active_agents": 1
+    }
+
+
+@router.get("/agents/status", tags=["Agents"])
+async def get_agents_status():
+    """
+    Get status of all AI agents (mock implementation).
+    """
+    # Return mock agent status data
+    return {
+        "coordinator": {
+            "status": "active",
+            "agent_id": "coordinator_001"
+        },
+        "log_parser": {
+            "status": "initialized",
+            "agent_id": "log_parser_001"
+        },
+        "anomaly_detection": {
+            "status": "initialized", 
+            "agent_id": "anomaly_001"
+        },
+        "root_cause_analysis": {
+            "status": "initialized",
+            "agent_id": "rca_001"
+        },
+        "explanation": {
+            "status": "initialized",
+            "agent_id": "explanation_001"
+        }
+    }
+
+
+@router.post("/agents/{agent_id}/test", tags=["Agents"])
+async def test_agent(agent_id: str):
+    """
+    Test an agent (mock implementation).
+    """
+    return {
+        "success": True,
+        "agent_id": agent_id,
+        "test_result": "Agent test completed successfully",
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+@router.post("/agents/{agent_id}/restart", tags=["Agents"])
+async def restart_agent(agent_id: str):
+    """
+    Restart an agent (mock implementation).
+    """
+    return {
+        "success": True,
+        "agent_id": agent_id,
+        "message": f"Agent {agent_id} restarted successfully",
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+@router.get("/agents/{agent_id}/logs", tags=["Agents"])
+async def get_agent_logs(agent_id: str):
+    """
+    Get agent logs (mock implementation).
+    """
+    return {
+        "agent_id": agent_id,
+        "logs": [
+            {
+                "timestamp": datetime.now().isoformat(),
+                "level": "INFO",
+                "message": f"Agent {agent_id} is running normally"
+            },
+            {
+                "timestamp": datetime.now().isoformat(),
+                "level": "DEBUG", 
+                "message": f"Processing request for {agent_id}"
+            }
+        ]
+    }
+
+
+@router.post("/agents/start-all", tags=["Agents"])
+async def start_all_agents():
+    """
+    Start all agents (mock implementation).
+    """
+    return {
+        "success": True,
+        "message": "All agents started successfully",
+        "agents_started": ["coordinator", "log_parser", "anomaly_detection", "root_cause_analysis", "explanation"],
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+# System Monitoring Endpoints (Mock)
+
+@router.get("/metrics/summary", tags=["Metrics"])
+async def get_system_metrics():
+    """
+    Get system metrics summary (mock implementation).
+    """
+    return {
+        "totalAnalyses": 42,
+        "totalAnomalies": 15,
+        "totalRootCauses": 8,
+        "systemHealth": 95,
+        "timestamp": datetime.now().isoformat()
+    }
+
+
+@router.get("/activity/recent", tags=["Activity"]) 
+async def get_recent_activity():
+    """
+    Get recent activity (mock implementation).
+    """
+    return [
+        {
+            "type": "analysis",
+            "description": "Log analysis completed: 2 anomalies found",
+            "timestamp": datetime.now().isoformat()
+        },
+        {
+            "type": "agent_restart",
+            "description": "Coordinator agent restarted",
+            "timestamp": datetime.now().isoformat()
+        }
+    ]

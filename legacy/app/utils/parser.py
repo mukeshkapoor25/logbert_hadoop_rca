@@ -1,1 +1,0 @@
-# Drain log parser wrapper

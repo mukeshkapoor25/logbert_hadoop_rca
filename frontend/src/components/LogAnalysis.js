@@ -75,6 +75,25 @@ const LogAnalysis = () => {
     }
   };
 
+  // Map backend response to UI format expected by AnalysisResults
+  const mapAnalysisResult = (apiResult) => {
+    if (!apiResult || !apiResult.results || !Array.isArray(apiResult.results) || apiResult.results.length === 0) {
+      return {};
+    }
+    const fileResult = apiResult.results[0];
+    return {
+      total_logs: fileResult.size || 0,
+      warnings: fileResult.anomalies_detected || 0,
+      errors: fileResult.anomalies_detected || 0,
+      processing_time: fileResult.analysis_time || apiResult.analysis_time || 'N/A',
+      summary: fileResult.root_causes && fileResult.root_causes.length > 0
+        ? `Root causes: ${fileResult.root_causes.join(', ')}`
+        : 'No root causes detected.',
+      patterns: fileResult.root_causes || [],
+      parsed_logs: [], // Not available in backend response
+    };
+  };
+
   const analyzeFile = async () => {
     if (uploadedFiles.length === 0) {
       toast.error('Please upload a log file first');
@@ -84,7 +103,8 @@ const LogAnalysis = () => {
     setLoading(true);
     try {
       const result = await apiService.analyzeLogFile(uploadedFiles[0], options);
-      setAnalysisResult(result);
+      const mappedResult = mapAnalysisResult(result);
+      setAnalysisResult(mappedResult);
       toast.success('File analysis completed successfully');
     } catch (error) {
       toast.error(`File analysis failed: ${error.message}`);

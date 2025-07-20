@@ -22,6 +22,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+.venv
 
 # PyInstaller
 *.manifest
@@ -485,4 +486,26 @@ Pipfile.lock
 !tests/fixtures/**
 !tests/data/**
 *.log
+
+# Backup and temporary files
+*.backup
+*.bak
+*.orig
+*.old
+*~
+*.temp
+*.tmp
+
+# IDE temporary files  
+.vscode/settings.json
+.idea/workspace.xml
+
+# Cache directories
+frontend/node_modules/.cache/
+frontend/build/
+
+# Upload directories
+uploads/
+temp_uploads/
+node_modules/
 

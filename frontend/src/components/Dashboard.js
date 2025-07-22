@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Badge, Alert, Button } from 'react-bootstrap';
-import { FaRobot, FaChartLine, FaExclamationTriangle, FaServer, FaClock, FaMemory } from 'react-icons/fa';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
-import { apiService } from '../services/apiService';
+import { Row, Col, Card, Badge, Alert } from 'react-bootstrap';
+import { FaRobot, FaChartLine, FaExclamationTriangle, FaServer, FaClock } from 'react-icons/fa';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+
 
 const Dashboard = ({ apiHealth, isConnected }) => {
   const [systemStats, setSystemStats] = useState({
@@ -12,7 +12,7 @@ const Dashboard = ({ apiHealth, isConnected }) => {
     uptime: '0:00:00'
   });
 
-  const [recentActivity, setRecentActivity] = useState([
+  const [recentActivity] = useState([
     { time: '10:30 AM', action: 'Log Analysis', status: 'completed', duration: '2.3s' },
     { time: '10:28 AM', action: 'Anomaly Detection', status: 'completed', duration: '1.8s' },
     { time: '10:25 AM', action: 'RCA Analysis', status: 'completed', duration: '4.1s' },

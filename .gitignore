@@ -135,7 +135,6 @@ dmypy.json
 *.hdf5
 *.ckpt
 checkpoints/
-models/
 saved_models/
 model_artifacts/
 
